@@ -7,11 +7,11 @@ const searchImages = async (text) => {
   return response.json();
 };
 
-const createCard = ({ webformatURL }) => {
+const createCard = ({ webformatURL, pageURL }) => {
   const card = document.createElement("div");
   card.classList.add("card-container");
   card.innerHTML = `
-  <a href="#" class="card-image">
+  <a href=${pageURL} class="card-image">
   <img src=${webformatURL} />
   <a />;
   `;
