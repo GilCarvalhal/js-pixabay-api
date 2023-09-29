@@ -7,9 +7,18 @@ const searchImages = async (text) => {
   return response.json();
 };
 
+const createCard = ({ webformatURL }) => {
+  const card = document.createElement("div");
+  card.innerHTML = `<img src=${webformatURL} />`;
+  return card;
+};
+
 const loadGallery = async (text) => {
-  const imagesInfo = await searchImages(text);
-  console.log(imagesInfo);
+  const container = document.querySelector(".container-gallery");
+  const { hits } = await searchImages(text);
+  const cards = hits.map(createCard);
+  container.replaceChildren(...cards);
+  console.log(cards);
 };
 
 const handlerKeyPress = ({ key, target }) => {
