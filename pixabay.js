@@ -7,13 +7,36 @@ const searchImages = async (text) => {
   return response.json();
 };
 
-const createCard = ({ webformatURL, pageURL }) => {
+const createLink = (tag) => {
+  `<a href="#">${tag}</a>`;
+};
+
+const createCard = ({ webformatURL, pageURL, tags, likes, comments }) => {
   const card = document.createElement("div");
   card.classList.add("card-container");
   card.innerHTML = `
   <a href=${pageURL} class="card-image">
   <img src=${webformatURL} />
   <a />;
+  <div class="card-info">
+    <div class="card-tags">
+    ${tags.split(",").map(createLink).join("")}
+    </div>
+
+    <div class="card-action">
+    <div class="card-like">
+    <i class="fa-regular fa-thumbs-up"></i>
+    <span>${likes}</span>
+    </div>
+    <div class="card-comment">
+    <i class="fa-regular fa-comment"></i>
+    <span>${comments}</span>
+    </div>
+    <div class="card-save">
+    <i class="fa-regular fa-bookmark"></i>
+    </div>
+    </div>
+  </div>
   `;
   return card;
 };
